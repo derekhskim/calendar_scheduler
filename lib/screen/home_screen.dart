@@ -4,8 +4,10 @@ import 'package:calendar_scheduler/component/calendar.dart';
 import 'package:calendar_scheduler/component/schedule_bottom_sheet.dart';
 import 'package:calendar_scheduler/component/schedule_card.dart';
 import 'package:calendar_scheduler/const/colors.dart';
+import 'package:calendar_scheduler/database/drift_database.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar_scheduler/component/today_banner.dart';
+import 'package:get_it/get_it.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  DateTime selectedDay = DateTime(
+  DateTime selectedDay = DateTime.utc(
     DateTime.now().year,
     DateTime.now().month,
     DateTime.now().day,
@@ -39,7 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
             scheduleCount: 3,
           ),
           SizedBox(height: 8),
-          _ScheduleList(),
+          _ScheduleList(
+            selectedDate: selectedDay,
+          ),
         ]),
       ),
     );
@@ -48,11 +52,17 @@ class _HomeScreenState extends State<HomeScreen> {
   FloatingActionButton renderFloatingActionButton() {
     return FloatingActionButton(
       onPressed: () {
-        showModalBottomSheet( /// Bottom Sheet, only stretches till half of the screen
+        showModalBottomSheet(
+          /// Bottom Sheet, only stretches till half of the screen
           context: context,
-          isScrollControlled: true, /// Enables the ability to stretch beyond half of the screen
-          builder: (_) { /// Takes regular builder context (_) {}
-            return ScheduleBottomSheet();
+          isScrollControlled: true,
+
+          /// Enables the ability to stretch beyond half of the screen
+          builder: (_) {
+            /// Takes regular builder context (_) {}
+            return ScheduleBottomSheet(
+              selectedDate: selectedDay,
+            );
           },
         );
       },
@@ -72,7 +82,11 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class _ScheduleList extends StatelessWidget {
-  const _ScheduleList({Key? key}) : super(key: key);
+  final DateTime selectedDate;
+  const _ScheduleList({
+    required this.selectedDate,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,20 +95,39 @@ class _ScheduleList extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
           horizontal: 8.0,
         ),
-        child: ListView.separated(
-            itemCount: 100,
-            separatorBuilder: (context, index) {
-              return SizedBox(
-                height: 8,
-              );
-            },
-            itemBuilder: (context, index) {
-              return ScheduleCard(
-                startTime: 12,
-                endTime: 14,
-                content: '프로그래밍 공부하기. $index',
-                color: Colors.red,
-              );
+        child: StreamBuilder<List<Schedule>>(
+            stream: GetIt.I<LocalDatabse>().watchSchedules(),
+            builder: (context, snapshot) {
+              print('------------ Original Data ------------');
+              print(snapshot.data);
+
+              List<Schedule> schedules = [];
+
+              if (snapshot.hasData) {
+                schedules = snapshot.data!
+                    .where((element) => element.date == selectedDate)
+                    .toList();
+              }
+
+              print('------------ filtered Data ------------');
+              print(selectedDate);
+              print(schedules);
+
+              return ListView.separated(
+                  itemCount: 100,
+                  separatorBuilder: (context, index) {
+                    return SizedBox(
+                      height: 8,
+                    );
+                  },
+                  itemBuilder: (context, index) {
+                    return ScheduleCard(
+                      startTime: 12,
+                      endTime: 14,
+                      content: '프로그래밍 공부하기. $index',
+                      color: Colors.red,
+                    );
+                  });
             }),
       ),
     );

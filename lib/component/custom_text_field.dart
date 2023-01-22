@@ -6,12 +6,14 @@ import '../const/colors.dart';
 class CustomTextField extends StatelessWidget {
   final String label;
   final bool isTime;
+  final FormFieldSetter<String> onSaved;
 
   /// true - 시간 / false - 내용
 
   const CustomTextField({
     required this.label,
     required this.isTime,
+    required this.onSaved,
     Key? key,
   }) : super(key: key);
 
@@ -38,6 +40,7 @@ class CustomTextField extends StatelessWidget {
 
   Widget renderTextField() {
     return TextFormField(
+      onSaved: onSaved,
       // FORM
       // null이 리턴되면 에러가 없다.
       // 에러가 있으면 에러를 String 값으로 리턴해준다.

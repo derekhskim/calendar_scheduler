@@ -29,6 +29,9 @@ class LocalDatabse extends _$LocalDatabse {
   Future<List<CategoryColor>> getCategoryColors() =>
       select(categoryColors).get();
 
+  Stream<List<Schedule>> watchSchedules() =>
+      select(schedules).watch();
+
   @override
   int get schemaVersion => 1;
 }
