@@ -36,14 +36,19 @@ class LocalDatabse extends _$LocalDatabse {
     ]);
 
     query.where(schedules.date.equals(date));
+    query.orderBy([
+      OrderingTerm.asc(schedules.startTime),
+    ]);
 
     return query.watch().map(
-          (rows) => rows.map(
-            (row) => ScheduleWithColor(
-              schedule: row.readTable(schedules),
-              categoryColor: row.readTable(categoryColors),
-            ),
-          ).toList(),
+          (rows) => rows
+              .map(
+                (row) => ScheduleWithColor(
+                  schedule: row.readTable(schedules),
+                  categoryColor: row.readTable(categoryColors),
+                ),
+              )
+              .toList(),
         );
   }
 
