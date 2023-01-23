@@ -30,7 +30,7 @@ class Calendar extends StatelessWidget {
       focusedDay: focusedDay,
       firstDay: DateTime(1800),
       lastDay: DateTime(3000),
-      headerStyle: HeaderStyle(
+      headerStyle: const HeaderStyle(
         formatButtonVisible: false,
         titleCentered: true,
         titleTextStyle: TextStyle(
@@ -51,7 +51,7 @@ class Calendar extends StatelessWidget {
             color: PRIMARY_COLOR,
           ),
         ),
-        outsideDecoration: BoxDecoration(
+        outsideDecoration: const BoxDecoration(
           shape: BoxShape.rectangle,
         ),
         defaultTextStyle: defaultTextStyle,

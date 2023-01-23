@@ -36,13 +36,13 @@ class ScheduleCard extends StatelessWidget {
                 startTime: startTime,
                 endTime: endTime,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 16,
               ),
               _Content(
                 content: content,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 16,
               ),
               _Category(
@@ -68,7 +68,7 @@ class _Time extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = TextStyle(
+    final textStyle = const TextStyle(
       fontWeight: FontWeight.w600,
       color: PRIMARY_COLOR,
       fontSize: 16,

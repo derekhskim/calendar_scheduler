@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:calendar_scheduler/component/calendar.dart';
 import 'package:calendar_scheduler/component/schedule_bottom_sheet.dart';
@@ -36,11 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
             focusedDay: focusedDay,
             onDaySelected: onDaySelected,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           TodayBanner(
             selectedDay: selectedDay,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           _ScheduleList(
             selectedDate: selectedDay,
           ),
@@ -67,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       },
       backgroundColor: PRIMARY_COLOR,
-      child: Icon(
+      child: const Icon(
         Icons.add,
       ),
     );
@@ -99,11 +98,11 @@ class _ScheduleList extends StatelessWidget {
             stream: GetIt.I<LocalDatabse>().watchSchedules(selectedDate),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
 
               if (snapshot.hasData && snapshot.data!.isEmpty) {
-                return Center(
+                return const Center(
                   child: Text('스케줄이 없습니다.'),
                 );
               }
@@ -111,7 +110,7 @@ class _ScheduleList extends StatelessWidget {
               return ListView.separated(
                   itemCount: snapshot.data!.length,
                   separatorBuilder: (context, index) {
-                    return SizedBox(
+                    return const SizedBox(
                       height: 8,
                     );
                   },

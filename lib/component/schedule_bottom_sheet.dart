@@ -43,7 +43,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
               : GetIt.I<LocalDatabse>().getScheduleById(widget.scheduleId!),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Center(
+              return const Center(
                 child: Text('스케줄을 불러올 수 없습니다.'),
               );
             }
@@ -51,7 +51,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
             // FutureBuilder 처음 실행됐고 로딩중일때
             if (snapshot.connectionState != ConnectionState.none &&
                 !snapshot.hasData) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -90,14 +90,14 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                             startInitialValue: startTime?.toString() ?? '',
                             endInitialValue: endTime?.toString() ?? '',
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           _Content(
                             onSaved: (String? val) {
                               content = val;
                             },
                             initialValue: content ?? '',
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           FutureBuilder<List<CategoryColor>>(
                               future:
                                   GetIt.I<LocalDatabse>().getCategoryColors(),
@@ -119,7 +119,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                                   },
                                 );
                               }),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           _SaveButton(
                             onPressed: onSavePressed,
                           ),
@@ -199,7 +199,7 @@ class _Time extends StatelessWidget {
             initialValue: startInitialValue,
           ),
         ),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
         Expanded(
           child: CustomTextField(
             label: '마감 시간',
@@ -311,7 +311,7 @@ class _SaveButton extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: PRIMARY_COLOR,
             ),
-            child: Text('저장'),
+            child: const Text('저장'),
           ),
         ),
       ],

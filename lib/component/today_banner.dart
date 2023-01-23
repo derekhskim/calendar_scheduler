@@ -14,7 +14,7 @@ class TodayBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = TextStyle(
+    final textStyle = const TextStyle(
       color: Colors.white,
     );
 
