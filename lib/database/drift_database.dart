@@ -29,8 +29,8 @@ class LocalDatabse extends _$LocalDatabse {
   Future<List<CategoryColor>> getCategoryColors() =>
       select(categoryColors).get();
 
-  Stream<List<Schedule>> watchSchedules() =>
-      select(schedules).watch();
+  Stream<List<Schedule>> watchSchedules(DateTime date) =>
+      (select(schedules)..where((tbl) => tbl.date.equals(date))).watch();
 
   @override
   int get schemaVersion => 1;
