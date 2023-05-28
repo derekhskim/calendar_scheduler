@@ -36,7 +36,7 @@ Contributions to the Calendar Scheduler app are welcome. If you find any issues 
 
 ## License
 
-The Calendar Scheduler app is open source and released under the [MIT License](LICENSE). Feel free to modify and use the code for personal or commercial projects.
+The Calendar Scheduler app is open source and released under the MIT License. Feel free to modify and use the code for personal or commercial projects.
 
 ## Acknowledgements
 
