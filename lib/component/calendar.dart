@@ -26,7 +26,7 @@ class Calendar extends StatelessWidget {
     );
 
     return TableCalendar(
-      locale: 'ko_KR',
+      locale: 'en_US',
       focusedDay: focusedDay,
       firstDay: DateTime(1800),
       lastDay: DateTime(3000),

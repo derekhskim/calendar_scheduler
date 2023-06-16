@@ -103,7 +103,7 @@ class _ScheduleList extends StatelessWidget {
 
               if (snapshot.hasData && snapshot.data!.isEmpty) {
                 return const Center(
-                  child: Text('스케줄이 없습니다.'),
+                  child: Text('There are no schedules to show.'),
                 );
               }
 

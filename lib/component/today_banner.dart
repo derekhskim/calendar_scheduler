@@ -3,6 +3,7 @@ import 'package:calendar_scheduler/model/schedule_with_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:calendar_scheduler/database/drift_database.dart';
+import 'package:intl/intl.dart';
 
 class TodayBanner extends StatelessWidget {
   final DateTime selectedDay;
@@ -18,6 +19,8 @@ class TodayBanner extends StatelessWidget {
       color: Colors.white,
     );
 
+    String formattedDate = DateFormat('MMMM dd, yyyy').format(selectedDay);
+
     return Container(
       color: PRIMARY_COLOR,
       child: Padding(
@@ -26,7 +29,7 @@ class TodayBanner extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '${selectedDay.year}년 ${selectedDay.month}월 ${selectedDay.day}일',
+              formattedDate,
               style: textStyle,
             ),
             StreamBuilder<List<ScheduleWithColor>>(
@@ -39,7 +42,7 @@ class TodayBanner extends StatelessWidget {
                 }
 
                 return Text(
-                  '$count개',
+                  '$count Schedules',
                   style: textStyle,
                 );
               }

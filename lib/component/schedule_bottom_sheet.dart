@@ -44,7 +44,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const Center(
-                child: Text('스케줄을 불러올 수 없습니다.'),
+                child: Text('Cannot load the schedules.'),
               );
             }
 
@@ -193,7 +193,7 @@ class _Time extends StatelessWidget {
       children: [
         Expanded(
           child: CustomTextField(
-            label: '시작 시간',
+            label: 'Start Time',
             isTime: true,
             onSaved: onStartSaved,
             initialValue: startInitialValue,
@@ -202,7 +202,7 @@ class _Time extends StatelessWidget {
         const SizedBox(width: 16),
         Expanded(
           child: CustomTextField(
-            label: '마감 시간',
+            label: 'End Time',
             isTime: true,
             onSaved: onEndSaved,
             initialValue: endInitialValue,
@@ -227,7 +227,7 @@ class _Content extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: CustomTextField(
-        label: '내용',
+        label: 'Notes',
         isTime: false,
         onSaved: onSaved,
         initialValue: initialValue,
@@ -311,7 +311,7 @@ class _SaveButton extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: PRIMARY_COLOR,
             ),
-            child: const Text('저장'),
+            child: const Text('Save'),
           ),
         ),
       ],
